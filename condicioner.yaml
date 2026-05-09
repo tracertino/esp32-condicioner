@@ -18,7 +18,7 @@ api:
 
 ota:
   - platform: esphome
-    password: "60312131"
+    password: "87ae36db2dfd6f86d6a426689cb2d6e3"
 
 wifi:
   ssid: Xiaomi_tracert
