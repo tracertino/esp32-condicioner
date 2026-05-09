@@ -1,0 +1,38 @@
+name: ESPHome Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      yaml_file:
+        description: 'Имя вашего YAML файла (например, condicioner.yaml)'
+        required: true
+        default: 'condicioner.yaml'
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install ESPHome
+        run: |
+          pip install esphome
+
+      - name: Compile firmware
+        run: |
+          esphome compile ${{ inputs.yaml_file }}
+
+      - name: Upload firmware
+        uses: actions/upload-artifact@v3
+        with:
+          name: firmware
+          path: |
+            .esphome/build/*/.pioenvs/*/firmware.bin
+            .esphome/build/*/.pioenvs/*/firmware.factory.bin
