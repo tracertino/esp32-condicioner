@@ -29,8 +29,12 @@ jobs:
         run: |
           esphome compile ${{ inputs.yaml_file }}
 
+      - name: Copy firmware to root
+        run: |
+          cp .esphome/build/*/.pioenvs/*/firmware.factory.bin firmware.bin
+
       - name: Upload firmware
         uses: actions/upload-artifact@v4
         with:
           name: firmware
-          path: .esphome/build/*/.pioenvs/*/firmware.factory.bin
+          path: firmware.bin
