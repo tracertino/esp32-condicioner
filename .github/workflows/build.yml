@@ -29,10 +29,13 @@ jobs:
         run: |
           esphome compile ${{ inputs.yaml_file }}
 
+      - name: List all files for debug
+        run: |
+          find . -name "*.bin" -type f
+          
       - name: Upload firmware
         uses: actions/upload-artifact@v4
         with:
           name: firmware
           path: |
-            .esphome/build/*/.pioenvs/*/firmware.bin
-            .esphome/build/*/.pioenvs/*/firmware.factory.bin
+            **/*.bin
