@@ -9,7 +9,7 @@ esp32:
 
 # Enable logging
 logger:
-  level: VERY_VERBOSE
+  level: DEBUG
   baud_rate: 0
 
 # Enable Home Assistant API
@@ -41,6 +41,30 @@ uart:
 
 climate:
   - platform: midea
-    name: Midea Climate         # Use a unique name.
+    name: Midea Climate
     uart_id: ac_uart_bus
-    autoconf: false              # Autoconfigure most options.
+    period: 2s                 # Увеличим период опроса
+    timeout: 3s                # Увеличим таймаут ожидания ответа
+    num_attempts: 2            # Уменьшим количество попыток
+    autoconf: false            # <-- ГЛАВНОЕ ИЗМЕНЕНИЕ! Отключаем автоопределение
+    beeper: false              # Пока отключим и звук, чтобы не мешал
+    protocol_version: 2        # Пробуем строго версию 2
+    visual:                    
+      min_temperature: 17 °C   
+      max_temperature: 30 °C   
+      temperature_step: 0.5 °C 
+    supported_modes:           # Эти режимы будут показаны в интерфейсе
+      - HEAT_COOL
+      - COOL
+      - HEAT
+      - DRY
+      - FAN_ONLY
+    supported_swing_modes:     # Опционально, если не будет работать - уберем
+      - VERTICAL
+    custom_fan_modes:          # Опционально
+      - SILENT
+      - TURBO
+    supported_presets:         
+      - ECO
+      - BOOST
+      - SLEEP
