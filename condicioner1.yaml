@@ -1,0 +1,70 @@
+esphome:
+  name: climate
+  friendly_name: climate
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+  level: DEBUG
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "s2PJlblzhmpqbFnlyVWlETkwKJPJTLygJOQ4ad+ZOYs="
+
+ota:
+  - platform: esphome
+    password: "87ae36db2dfd6f86d6a426689cb2d6e3"
+
+wifi:
+  ssid: DIR-842-682e
+  password: "96560402"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Climate Fallback Hotspot"
+    password: "Ap60312131"
+
+uart:
+  id: ac_uart_bus
+  tx_pin: GPIO04
+  rx_pin: GPIO05
+  baud_rate: 9600
+
+# Пользовательский компонент для отправки сырых команд
+custom_component:
+  - lambda: |-
+      auto send_timer = new ESPHoMe::HighResolutionTimer();
+      
+      send_timer->every(5000, [](Esphome::HighResolutionTimer *timer) {
+        // Команда GET_STATUS, которую мы видели в логах
+        std::vector<uint8_t> cmd = {0xAA, 0x21, 0xAC, 0x8D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x41, 0x81, 0x00, 0xFF, 0x03, 0xFF, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03};
+        // Пересчитываем контрольную сумму для команды
+        uint8_t checksum = 0;
+        for (int i = 1; i < cmd.size(); i++) {
+          checksum += cmd[i];
+        }
+        cmd.push_back(checksum);
+        
+        // Отправляем в UART
+        id(ac_uart_bus).write_array(cmd);
+        ESP_LOGD("custom", "Sending GET_STATUS command");
+      });
+
+# Обработчик входящих данных из UART
+  on_...:
+    uart:
+      id: ac_uart_bus
+      data: !lambda |-
+        std::vector<uint8_t> data(x.begin(), x.end());
+        std::string hex_str;
+        char buf[4];
+        for (uint8_t byte : data) {
+          sprintf(buf, "%02X ", byte);
+          hex_str += buf;
+        }
+        ESP_LOGD("custom", "Received data: %s", hex_str.c_str());
