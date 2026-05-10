@@ -22,8 +22,8 @@ ota:
     password: "87ae36db2dfd6f86d6a426689cb2d6e3"
 
 wifi:
-  ssid: Xiaomi_tracert
-  password: "60312131"
+  ssid: tracertino
+  password: "Defaultr123"
   manual_ip:
     static_ip: 192.168.31.181
     gateway: 192.168.31.1
