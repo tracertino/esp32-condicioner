@@ -15,11 +15,11 @@ logger:
 # Enable Home Assistant API
 api:
   encryption:
-    key: "qazxswedc123"
+    key: "qwaser42qwaser42qwaser42qwaser42"
 
 ota:
   - platform: esphome
-    password: "123edcxswqaz"
+    password: "qwaser42qwaser42qwaser42qwaser42"
 
 wifi:
   ssid: tracertino
