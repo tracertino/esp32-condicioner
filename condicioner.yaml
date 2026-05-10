@@ -22,8 +22,8 @@ ota:
     password: "87ae36db2dfd6f86d6a426689cb2d6e3"
 
 wifi:
-  ssid: DIR-842-682e
-  password: "96560402"
+  ssid: Xiaomi_tracert
+  password: "60312131"
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
