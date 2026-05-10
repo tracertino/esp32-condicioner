@@ -15,11 +15,11 @@ logger:
 # Enable Home Assistant API
 api:
   encryption:
-    key: "s2PJlblzhmpqbFnlyVWlETkwKJPJTLygJOQ4ad+ZOYs="
+    key: "qazxswedc123"
 
 ota:
   - platform: esphome
-    password: "87ae36db2dfd6f86d6a426689cb2d6e3"
+    password: "123edcxswqaz"
 
 wifi:
   ssid: tracertino
@@ -29,6 +29,10 @@ wifi:
   ap:
     ssid: "Climate Fallback Hotspot"
     password: "Ap60312131"
+
+# Enable Web server.
+web_server:
+  port: 80
 
 uart:
   id: ac_uart_bus
