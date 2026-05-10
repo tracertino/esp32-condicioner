@@ -24,6 +24,10 @@ ota:
 wifi:
   ssid: Xiaomi_tracert
   password: "60312131"
+  manual_ip:
+    static_ip: 192.168.31.181
+    gateway: 192.168.31.1
+    subnet: 255.255.255.0
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
