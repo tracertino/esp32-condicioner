@@ -9,7 +9,8 @@ esp32:
 
 # Enable logging
 logger:
-  level: DEBUG
+  level: VERY_VERBOSE
+  baud_rate: 0
 
 # Enable Home Assistant API
 api:
@@ -34,45 +35,12 @@ web_server:
 
 uart:
   id: ac_uart_bus
-  tx_pin: GPIO01
-  rx_pin: GPIO03
+  tx_pin: GPIO05
+  rx_pin: GPIO04
   baud_rate: 9600
 
 climate:
   - platform: midea
     name: Midea Climate         # Use a unique name.
     uart_id: ac_uart_bus
-    period: 1s                  # Optional
-    timeout: 2s                 # Optional
-    num_attempts: 3             # Optional
-    autoconf: true              # Autoconfigure most options.
-    beeper: true                # Beep on commands.
-    visual:                     # Optional. Example of visual settings override.
-      min_temperature: 17 °C    # min: 17
-      max_temperature: 30 °C    # max: 30
-      temperature_step: 0.5 °C  # min: 0.5
-    supported_modes:            # Optional. All capabilities in this section may be detected by autoconf.
-      - FAN_ONLY
-      - HEAT_COOL
-      - COOL
-      - HEAT
-      - DRY
-    custom_fan_modes:           # Optional
-      - SILENT
-      - TURBO
-    supported_presets:          # Optional. All capabilities in this section may be detected by autoconf.
-      - ECO
-      - BOOST
-      - SLEEP
-    custom_presets:             # Optional. All capabilities in this section may be detected by autoconf.
-      - FREEZE_PROTECTION
-    supported_swing_modes:      # Optional
-      - VERTICAL
-      - HORIZONTAL
-      - BOTH
-    outdoor_temperature:        # Optional. Outdoor temperature sensor (may display incorrect values after long inactivity).
-      name: Temp
-    power_usage:                # Optional. Power usage sensor (only for devices that support this feature).
-      name: Power
-    humidity_setpoint:          # Optional. Indoor humidity sensor (only for devices that support this feature).
-      name: Humidity
+    autoconf: false              # Autoconfigure most options.
