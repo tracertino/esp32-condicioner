@@ -1,5 +1,5 @@
 esphome:
-  name: climate v2
+  name: climate_v2
   friendly_name: climate v2
 
 esp32:
