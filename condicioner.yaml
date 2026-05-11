@@ -42,6 +42,7 @@ uart:
 
 climate:
   - platform: midea
+    id: midea_climate
     name: Midea Climate A         # Use a unique name.
     uart_id: ac_uart_bus
     
