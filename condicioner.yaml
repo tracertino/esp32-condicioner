@@ -36,8 +36,8 @@ web_server:
 
 uart:
   id: ac_uart_bus
-  tx_pin: GPIO01
-  rx_pin: GPIO03
+  tx_pin: GPIO04
+  rx_pin: GPIO05
   baud_rate: 9600
 
 climate:
