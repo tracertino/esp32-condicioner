@@ -41,8 +41,8 @@ uart:
   baud_rate: 9600
 
 climate:
-  - platform: midea
-    id: midea_climate
+  - platform: haier
+    protocol: SMARTAIR2
     name: Midea Climate A         # Use a unique name.
     uart_id: ac_uart_bus
     
